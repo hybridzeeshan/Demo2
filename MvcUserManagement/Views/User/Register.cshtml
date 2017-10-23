@@ -1,0 +1,69 @@
+﻿@model MvcUserManagement.Models.userLogin
+@{
+    ViewBag.Title = "Register";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnRegister').click(function () {
+            var name = $('#uName').val();
+            var password = $('#Password').val();
+            var cpassword = $('#ConfirmPassword').val();
+            if (name == "" || password == "" || cpassword == "") {
+                alert("All Field are Required");
+            }
+        });
+
+    });
+</script>
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.uName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.uName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="btnRegister" class="btn btn-default" value="Register" />
+        </div>
+        <div style="margin-left:210px">
+           @if (ViewBag.SuccessMessage!=null)
+           {
+            <br /><p style="color:green">
+                @ViewBag.SuccessMessage
+            </p>
+           }
+           @if (ViewBag.ErrorMessage != null)
+           {
+            <br /><p style="color:green">
+                @ViewBag.ErrorMessage
+            </p>
+           }
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

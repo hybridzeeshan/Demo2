@@ -1,0 +1,75 @@
+﻿@model MvcUserManagement.Models.userLogin
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@using (Html.BeginForm("Index","User",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <p>Please enter user Login information</p>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.uName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.uName, new { htmlAttributes = new { @class = "form-control" } })
+               @Html.ValidationMessageFor(model => model.uName, "", new { @class = "text-danger" })
+           
+             </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password,new { @class = "form-control"  })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+          
+             </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="btnLogin" value="Login" class="btn btn-default" />
+                @Html.ActionLink("Create New User", "Register")
+            </div>
+        </div>
+        <div style="margin-left:200px">
+           @if (ViewBag.LoginMessage != null)
+           {
+               <p style="color:red">@ViewBag.LoginMessage</p>
+           }
+          @if (ViewBag.LoginSuccess != null)
+          {
+            <p style="color:green">@ViewBag.LoginSuccess</p>
+          }
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index","Home")
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('#btnLogin').click(function () {
+            var username=$('#uName').val();
+            var pass = $('#Password').val();
+            if(username=="" || pass==""){
+                alert("Username and password can't be empty");
+            }
+        });
+
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

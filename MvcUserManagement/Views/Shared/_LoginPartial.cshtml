@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    @*<li><a id="logoutid" href="#" onclick="location.href='@Url.Action("Index","User")'">Logout</a></li>*@
+    <li>@Html.ActionLink("Log out", "Index", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Index", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        @*<li><a id="regid" href="#" onclick="location.href='@Url.Action("Register","User")'">Register</a> </li>
+        <li><a id="loginid" href="#"  onclick="location.href='@Url.Action("Index","User")'">Login</a></li>*@
+       
+    </ul>
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script >
+    //$(document).ready(function () {
+    //    $("#logoutid").hide();
+    //});
+</script>

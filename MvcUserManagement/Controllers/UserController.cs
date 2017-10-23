@@ -12,7 +12,6 @@ namespace MvcUserManagement.Controllers
     {
         // GET: User
         //test comment
-        //test 2
         public ActionResult Index()
         {
             FormsAuthentication.SignOut();
